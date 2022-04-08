@@ -6,6 +6,8 @@
     "build": "parcel build"
   },
   "devDependencies": {
-    "parcel": "latest"
+    "@parcel/transformer-glsl": "^2.4.1",
+    "parcel": "latest",
+    "twgl.js": "^4.22.0"
   }
 }
