@@ -4,6 +4,7 @@ import vert_source from './base.vert'
 import frag_source from './base.frag'
 
 class BaseEffect {
+
     constructor() {
         this.gl = null;
         this.arrays = null;
@@ -48,8 +49,23 @@ class BaseEffect {
     }
 
     shutdown() {
-        //TODO:
+        if (this.programInfo != null) {
+            // delete shaders ?? 
+            this.gl.deleteProgram(this.programInfo.program);
+            this.programInfo = null;
+        }
+
+        if (this.bufferInfo != null) {
+            for (const attrib of Object.values(this.bufferInfo.attribs)) 
+                gl.deleteBuffer(attrib.buffer);
+            
+            if (this.bufferInfo.indices) 
+                gl.deleteBuffer(this.bufferInfo.indices);
+
+            this.bufferInfo = null;
+        }
     }
+    
 
     computeUniforms(time) {
         const uniforms = {
