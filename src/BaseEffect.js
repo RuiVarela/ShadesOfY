@@ -1,7 +1,7 @@
 import * as twgl from 'twgl.js';
 
-import vert_source from './base.vert'
-import frag_source from './base.frag'
+import BaseVertexSource from './BaseEffect.vert'
+import BaseFragmentSource from './BaseEffect.frag'
 
 class BaseEffect {
 
@@ -10,13 +10,16 @@ class BaseEffect {
         this.arrays = null;
         this.programInfo = null;
         this.bufferInfo = null;
+
+        this.vertexCode = BaseVertexSource
+        this.fragmentCode = BaseFragmentSource
     }
 
     render(time) {
         twgl.resizeCanvasToDisplaySize(this.gl.canvas);
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     
-        const uniforms = this.computeUniforms(time);
+        let uniforms = this.computeUniforms(time);
     
         this.gl.useProgram(this.programInfo.program);
         twgl.setBuffersAndAttributes(this.gl, this.programInfo, this.bufferInfo);
@@ -24,14 +27,8 @@ class BaseEffect {
         twgl.drawBufferInfo(this.gl, this.bufferInfo);
     }
 
-    setup(gl, vert, frag) {
+    setup(gl) {
         this.shutdown();
-
-        if (!vert)
-            vert = vert_source;
-
-        if (!frag)
-            frag = frag_source;
 
         this.gl = gl;
         this.arrays = {
@@ -44,10 +41,9 @@ class BaseEffect {
                 1, 1, 0],
         };
 
-        this.programInfo = twgl.createProgramInfo(this.gl, [vert,frag]);
+        this.programInfo = twgl.createProgramInfo(this.gl, [this.vertexCode, this.fragmentCode]);
         this.bufferInfo = twgl.createBufferInfoFromArrays(this.gl, this.arrays);
     }
-
     shutdown() {
         if (this.programInfo != null) {
             // delete shaders ?? 
@@ -68,11 +64,21 @@ class BaseEffect {
     
 
     computeUniforms(time) {
-        const uniforms = {
+        let uniforms = {
             time: time * 0.001,
             resolution: [this.gl.canvas.width, this.gl.canvas.height],
         };
         return uniforms;       
     }
 }
-export default BaseEffect;
+
+
+class PixelEffect extends BaseEffect {
+    constructor(fragment) {
+        super();
+        this.vertexCode = BaseVertexSource;
+        this.fragmentCode = fragment;
+    }
+}
+
+export { BaseEffect, PixelEffect };
