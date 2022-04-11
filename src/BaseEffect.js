@@ -52,11 +52,12 @@ class BaseEffect {
         }
 
         if (this.bufferInfo != null) {
-            for (const attrib of Object.values(this.bufferInfo.attribs)) 
-                gl.deleteBuffer(attrib.buffer);
             
-            if (this.bufferInfo.indices) 
-                gl.deleteBuffer(this.bufferInfo.indices);
+            for (const attrib of Object.values(this.bufferInfo.attribs))
+                this.gl.deleteBuffer(attrib.buffer);
+
+            if (this.bufferInfo.indices)
+                this.gl.deleteBuffer(this.bufferInfo.indices);
 
             this.bufferInfo = null;
         }

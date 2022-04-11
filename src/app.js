@@ -2,13 +2,18 @@ import { BaseEffect, PixelEffect } from "./BaseEffect";
 
 // Shaders
 import CircleEffectFragmentSource from './CircleEffect.frag'
+import WiggleEffectFragmentSource from './WiggleEffect.frag'
 
+const available = [
+    {name: "BaseEffect",    kind: "BaseEffect" },
+    {name: "CircleEffect",  kind: "PixelEffect", fragment: CircleEffectFragmentSource },
+    {name: "WiggleEffect",  kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
+];
 
-function fxFactory(name) {
-    switch (name) {
-
-        case "CircleEffect": 
-            return new PixelEffect(CircleEffectFragmentSource);
+function fxFactory(info) {
+    switch (info.kind) {  
+        case "PixelEffect": 
+            return new PixelEffect(info.fragment);
 
         case "BaseEffect":
         default:
@@ -16,9 +21,26 @@ function fxFactory(name) {
     }
 }
 
-const gl = document.querySelector("#gl_canvas").getContext("webgl");
+
+//
+// fill the list of effects
+//
+let selectList = document.getElementById("effect_list"); 
+for (var i = 0; i < available.length; i++) {
+    var option = document.createElement("option");
+    option.value = i;
+    option.text = available[i].name;
+    selectList.appendChild(option);
+}
+selectList.addEventListener("change", (event) => {
+    next_effect = available[event.target.value];
+    console.log(`"Changed to ${next_effect.name}`);
+});
+
+
+const gl = document.querySelector("#gl_canvas").getContext("webgl2");
 var running_effect = null;
-var next_effect = "CircleEffect";
+var next_effect = available[0];
 
 function render(time) {
     if (next_effect != null) {
