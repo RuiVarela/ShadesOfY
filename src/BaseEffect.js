@@ -1,7 +1,7 @@
 import * as twgl from 'twgl.js';
 
-import BaseVertexSource from './BaseEffect.vert'
-import BaseFragmentSource from './BaseEffect.frag'
+import BaseVertexSource from './glsl/BaseEffect.vert'
+import BaseFragmentSource from './glsl/BaseEffect.frag'
 
 class BaseEffect {
 

@@ -6,11 +6,7 @@ out vec4 fragColor;
 uniform vec2 resolution;
 uniform float time;
 
-
-float cutout(float v, float position, float line_size) {
-  return smoothstep(position - line_size, position, v) -
-         smoothstep(position, position + line_size, v);
-}
+#pragma glslify: sCut = require('./common/sCut.glsl')
 
 void main() {
   vec2 uv = 2.0 * (gl_FragCoord.xy / resolution) - 1.0;
@@ -19,7 +15,7 @@ void main() {
   float dist = length(uv);
   float line_size = 0.06;
   float radius = 0.8;
-  float color = cutout(dist, radius, line_size);
+  float color = sCut(dist, radius, line_size);
 
   fragColor = vec4(color, color,color, 1.0);
 }
