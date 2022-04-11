@@ -1,6 +1,6 @@
-// positive sin, rescales sin to fit in [0, 1] and multiplies by scale in the end
-float pSin(float a, float scale) {
-  return (0.5 * sin(a) + 0.5) * scale;
+// positive sin, rescales sin to fit in [0, 1]
+float pSin(float a) {
+  return (0.5 * sin(a) + 0.5);
 }
 
 #pragma glslify: export(pSin)

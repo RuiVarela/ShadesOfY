@@ -1,15 +1,14 @@
 import { BaseEffect, PixelEffect } from "./BaseEffect";
 
 // Shaders
-import CircleEffectFragmentSource from './glsl/CircleEffect.frag'
+import LinesEffectFragmentSource from './glsl/LinesEffect.frag'
 import WiggleEffectFragmentSource from './glsl/WiggleEffect.frag'
 
 const available = [
-    {name: "WiggleEffect",  kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
+    {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
 
-    
     {name: "BaseEffect",    kind: "BaseEffect" },
-    {name: "CircleEffect",  kind: "PixelEffect", fragment: CircleEffectFragmentSource },
+    {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
     {name: "WiggleEffect",  kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
 ];
 
