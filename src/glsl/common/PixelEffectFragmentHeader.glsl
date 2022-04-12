@@ -12,6 +12,6 @@ uniform float time;
 //
 // Common includes
 //
-// Utils.glsl
 #pragma glslify: import('./Utils.glsl')
+#pragma glslify: import('./Coloring.glsl')
 

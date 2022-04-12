@@ -4,7 +4,7 @@ import { BaseEffect, PixelEffect } from "./BaseEffect";
 import LinesEffectFragmentSource from './glsl/LinesEffect.frag'
 import WiggleEffectFragmentSource from './glsl/WiggleEffect.frag'
 
-console.log(LinesEffectFragmentSource);
+//console.log(LinesEffectFragmentSource);
 
 const available = [
     {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
