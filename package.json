@@ -5,9 +5,15 @@
     "start": "parcel",
     "build": "parcel build"
   },
+  "glslify": {
+    "transform": [
+      "glslify-import"
+    ]
+  },
   "devDependencies": {
     "@parcel/transformer-glsl": "^2.4.1",
     "glsl-rotate": "^1.1.0",
+    "glslify-import": "^3.1.0",
     "parcel": "latest",
     "twgl.js": "^4.22.0"
   }
