@@ -3,11 +3,12 @@ import { BaseEffect, PixelEffect } from "./BaseEffect";
 // Shaders
 import LinesEffectFragmentSource from './glsl/LinesEffect.frag'
 import WiggleEffectFragmentSource from './glsl/WiggleEffect.frag'
+import SpiralEffectFragmentSource from './glsl/SpiralEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
+    {name: "SpiralEffect",  kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
 
     {name: "BaseEffect",    kind: "BaseEffect" },
     {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },

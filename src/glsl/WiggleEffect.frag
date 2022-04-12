@@ -21,5 +21,9 @@ void main() {
 
   float color = sCut(dist, radius, line_size) * visible_region;
 
-  fragColor = vec4(color, 0.0, 0.0, 1.0);
+
+  //background
+  vec3 background = backgroundPalette(resolution, gl_FragCoord.xy, ColorIq3, time * 0.01) * 0.7;
+  vec3 foreground = vec3(1.0, 1.0, 1.0);
+  fragColor = vec4(mix(background, foreground, color), 1.0);
 }

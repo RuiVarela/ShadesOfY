@@ -23,7 +23,7 @@ vec3 backgroundPalette(vec2 resolution, vec2 coord, vec3 color[4], float t) {
 
   // shadowing
   //col *= 0.5 + 0.5 * sqrt(4.0 * yt * (1.0 - yt));
-  col *= 0.2 + 0.9 * sqrt(4.0 * yt * (1.0 - yt));
+  col *= 0.2 + 0.8 * sqrt(4.0 * yt * (1.0 - yt));
   return col;
 }
 

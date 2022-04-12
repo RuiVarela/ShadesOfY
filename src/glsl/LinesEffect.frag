@@ -6,7 +6,7 @@ const float radius = 0.5;
 void main() {
   vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
 
-  uv *= 0.2 + pSin(time);
+  uv *= 0.2 + pSin(time * 0.1);
 
   vec2 local_uv = uv * 3.0;
   local_uv = fract(local_uv) * 2.0 - 1.0;
