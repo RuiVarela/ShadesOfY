@@ -4,6 +4,8 @@ import { BaseEffect, PixelEffect } from "./BaseEffect";
 import LinesEffectFragmentSource from './glsl/LinesEffect.frag'
 import WiggleEffectFragmentSource from './glsl/WiggleEffect.frag'
 
+console.log(LinesEffectFragmentSource);
+
 const available = [
     {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
 
@@ -51,6 +53,7 @@ function render(time) {
             running_effect.shutdown();
         
         running_effect = fxFactory(next_effect);
+
         running_effect.setup(gl);
         next_effect = null;
     }

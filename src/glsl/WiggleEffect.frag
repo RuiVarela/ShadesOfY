@@ -1,25 +1,12 @@
-#version 300 es
-precision mediump float;
-
-#pragma glslify: pSin = require('./common/pSin.glsl')
-#pragma glslify: sCut = require('./common/sCut.glsl')
+#pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
 #pragma glslify: rotate = require(glsl-rotate)
 
-
-
-out vec4 fragColor;
-
-uniform vec2 resolution;
-uniform float time;
-
-const float PI = 3.141592;
 const float line_size = 0.06;
 const float blobs = 15.0;
 
 void main() {
-  vec2 uv = 2.0 * (gl_FragCoord.xy / resolution) - 1.0;
-  uv.x *= (resolution.x / resolution.y);
+  vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
 
   uv = rotate(uv, time * 0.3);
 
