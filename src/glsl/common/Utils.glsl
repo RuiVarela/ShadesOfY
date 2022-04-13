@@ -1,6 +1,7 @@
 // constants
 const float PI = 3.14159265359;
 const float TWO_PI = 6.28318530718;
+const float E = 2.71828182845904523;
 
 // normalizes the input keeping the screen aspect ratio
 // - screen center will be at (0,0), 
