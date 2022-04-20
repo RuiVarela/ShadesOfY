@@ -8,11 +8,10 @@ import SpiralEffectFragmentSource from './glsl/SpiralEffect.frag'
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "SpiralEffect",  kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
-
     {name: "BaseEffect",    kind: "BaseEffect" },
     {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
     {name: "WiggleEffect",  kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
+    {name: "SpiralEffect",  kind: "PixelEffect", fragment: SpiralEffectFragmentSource }
 ];
 
 function fxFactory(info) {
