@@ -1,14 +1,19 @@
 import { BaseEffect, PixelEffect } from "./BaseEffect";
 
 // Shaders
+import FunctionPlotEffectFragmentSource from './glsl/FunctionPlotEffect.frag'
 import LinesEffectFragmentSource from './glsl/LinesEffect.frag'
 import WiggleEffectFragmentSource from './glsl/WiggleEffect.frag'
 import SpiralEffectFragmentSource from './glsl/SpiralEffect.frag'
+import BounceEffectFragmentSource from './glsl/BounceEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
+    {name: "BounceEffect",  kind: "PixelEffect", fragment: BounceEffectFragmentSource },
+
     {name: "BaseEffect",    kind: "BaseEffect" },
+    {name: "FunctionPlotEffect",  kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "LineEffect",  kind: "PixelEffect", fragment: LinesEffectFragmentSource },
     {name: "WiggleEffect",  kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect",  kind: "PixelEffect", fragment: SpiralEffectFragmentSource }

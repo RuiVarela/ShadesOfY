@@ -24,3 +24,10 @@ float sCut(float v, float position, float line_size) {
   return smoothstep(position - line_size, position, v) -
          smoothstep(position, position + line_size, v);
 }
+
+// cuts a point
+float sCutPoint(vec2 v, vec2 position, float size) {
+    float d = distance(v, position);
+    return smoothstep(-size, 0.0, d) - smoothstep(0.0, size, d);
+}
+
