@@ -28,31 +28,41 @@ float bounce(float x, float base) {
 void main() {
     vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
 
+
     float mask = 0.0;
+
+    // guides
     mask = max(mask, sCut(uv.x, -1.0, line_size));
     mask = max(mask, sCut(uv.x, 1.0, line_size));
 
     mask = max(mask, sCut(uv.y, -1.0, line_size));
     mask = max(mask, sCut(uv.y, 0.0, line_size));
     mask = max(mask, sCut(uv.y, 1.0, line_size));
-    
 
     // [0, 1]
     float x = (uv.x * 0.5 + 0.5);
     //float base = 2.0;
     float base = clamp(1.0 - (mouse.x / resolution.x), 0.0, 0.8);
-    float value = bounce(x, base);
+    float y = bounce(x, base);
 
     if (x < 0.0 || x > 1.0) {
         // don't write on the sids
     } else if (uv.y < 0.0) {
-        mask = max(mask, value);
+        mask = max(mask, y);
     } else {
-        mask = max(mask, sCutPoint(uv, vec2(uv.x, value), line_size * 2.0));
+        mask = max(mask, sCutPoint(uv, vec2(uv.x, y), line_size * 2.0));
     }
 
-    //background
-    vec3 background = vec3(0.0, 0.0, 0.0);
-    vec3 foreground = vec3(1.0, 1.0, 1.0);
-    fragColor = vec4(mix(background, foreground, mask), 1.0);
+
+
+    float ball_x = fract(time * 0.4);
+    float ball_y = bounce(ball_x, base);
+
+    ball_x = ball_x * 2.0 - 1.0;
+    float ball_d = distance(uv, vec2(ball_x, ball_y));
+    
+
+    fragColor = vec4(mask);
+    fragColor = mix(fragColor, vec4(1.0, 0.0, 0.0, 1.0), step(ball_d, 0.03));
+    fragColor.a = 1.0;
 }
