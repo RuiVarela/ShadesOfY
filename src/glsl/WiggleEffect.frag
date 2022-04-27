@@ -1,7 +1,5 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
-#pragma glslify: rotate = require(glsl-rotate)
-
 const float line_size = 0.06;
 const float blobs = 15.0;
 

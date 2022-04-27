@@ -1,7 +1,5 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
-#pragma glslify: rotate = require(glsl-rotate)
-
 struct Light {
   vec2 position;
   vec3 color;

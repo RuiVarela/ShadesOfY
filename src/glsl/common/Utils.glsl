@@ -1,8 +1,3 @@
-// constants
-const float PI = 3.14159265359;
-const float TWO_PI = 6.28318530718;
-const float E = 2.71828182845904523;
-
 // normalizes the input keeping the screen aspect ratio
 // - screen center will be at (0,0), 
 // - Y will vary from -1 to 1 
@@ -12,7 +7,6 @@ vec2 nomalizeCoord(vec2 screen_size, vec2 coord) {
   position.x *= screen_size.x / screen_size.y;
   return position;
 }
-
 
 // positive sin, rescales sin to fit in [0, 1]
 float pSin(float a) {

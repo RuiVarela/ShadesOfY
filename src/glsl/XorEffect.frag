@@ -1,7 +1,6 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
-float xorSample(vec2 pos)
-{
+float xorSample(vec2 pos) {
     const float bits = 6.0;
     const float res = pow(2.0, bits);
 
@@ -14,12 +13,20 @@ float xorSample(vec2 pos)
     return r;
 }
 
+vec4 render(vec2 position) {
+    vec2 uv = nomalizeCoord(resolution, position);
+
+    uv = uv * (0.5 + pSin(time * 0.3));
+
+    uv = rotate(uv, time * 0.05);
+    
+    float color = xorSample(uv);
+    return vec4(color, color, color, 1.0);
+}
+
+
+#pragma glslify: multisample = require(./common/multisample.glsl, render=render) 
 
 void main() {
-    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
-
-    uv *= 2.0;
-
-    vec3 color = vec3(xorSample(uv));
-    fragColor = vec4(color, 1.0);
+    fragColor = multisample(4.0);;
 }

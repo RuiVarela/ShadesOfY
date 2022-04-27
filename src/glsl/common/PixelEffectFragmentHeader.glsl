@@ -15,4 +15,5 @@ uniform vec4 mouse;    // xy = current mouse coords. abs(zw) = click pixel, zw >
 //
 #pragma glslify: import('./Utils.glsl')
 #pragma glslify: import('./Coloring.glsl')
+#pragma glslify: import('./Math.glsl')
 
