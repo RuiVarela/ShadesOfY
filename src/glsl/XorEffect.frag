@@ -28,5 +28,5 @@ vec4 render(vec2 position) {
 #pragma glslify: multisample = require(./common/multisample.glsl, render=render) 
 
 void main() {
-    fragColor = multisample(4.0);;
+    fragColor = multisample(4.0);
 }

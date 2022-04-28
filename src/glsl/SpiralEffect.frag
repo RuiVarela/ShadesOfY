@@ -3,8 +3,9 @@
 const float line_size = 0.05;
 const float blobs = 15.0;
 
-void main() {
-    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
+
+vec4 render(vec2 position) {
+    vec2 uv = nomalizeCoord(resolution, position);
 
     float speed = time * 0.1;
     float distance = 0.3;
@@ -34,6 +35,14 @@ void main() {
     spiral = mod(spiral + speed, distance);
     spiral = sCut(spiral, distance / 2.0, line_size);
 
+    return vec4(spiral);
+}
+
+
+#pragma glslify: multisample = require(./common/multisample.glsl, render=render) 
+
+void main() {
+    float spiral = multisample(4.0).x;
 
     //background
     vec3 background = backgroundPalette(resolution, gl_FragCoord.xy, ColorIq1, time * 0.01) * 0.7;

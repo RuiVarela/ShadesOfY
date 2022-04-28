@@ -8,16 +8,18 @@ import SpiralEffectFragmentSource from './glsl/SpiralEffect.frag'
 import BounceEffectFragmentSource from './glsl/BounceEffect.frag'
 import LightsEffectFragmentSource from './glsl/LightsEffect.frag'
 import XorEffectFragmentSource from './glsl/XorEffect.frag'
+import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
+    {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
     {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
+    {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect", kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource }
