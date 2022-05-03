@@ -9,11 +9,13 @@ import BounceEffectFragmentSource from './glsl/BounceEffect.frag'
 import LightsEffectFragmentSource from './glsl/LightsEffect.frag'
 import XorEffectFragmentSource from './glsl/XorEffect.frag'
 import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
+import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
+
+    {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -22,7 +24,8 @@ const available = [
     {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect", kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
-    {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource }
+    {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
+    {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
 ];
 
 function fxFactory(info) {
