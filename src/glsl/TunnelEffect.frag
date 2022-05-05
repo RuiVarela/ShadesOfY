@@ -1,7 +1,7 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
 vec3 brick(vec2 uv) {
-    float brick_ratio = 2.09;
+    float brick_ratio = 2.095; // a good ratio to wrap around on a tunnel
     float brick_y = 5.0;
     float brick_x = brick_y / brick_ratio;
     
@@ -33,7 +33,17 @@ vec3 brick(vec2 uv) {
 void main() {
     vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
 
-    vec3 color = brick(uv);
+    
+    float a = atan(uv.y, uv.x) + PI;
+    float r1 = length(uv);
+    float r2 = pow(pow(uv.x * uv.x, 4.0) + pow(uv.y * uv.y, 4.0), 1.0/8.0);
+
+    float r = mix(r1, r2, pSin(time * 0.1));
+
+    vec2 polar_uv = vec2(a , 1.0 / r + time * 0.5);
+    vec3 color = brick(polar_uv);
+
+    color = color * clamp(r * 1.0, 0.0, 1.0);
 
     fragColor = vec4(color, 1.0);
 }

@@ -10,12 +10,12 @@ import LightsEffectFragmentSource from './glsl/LightsEffect.frag'
 import XorEffectFragmentSource from './glsl/XorEffect.frag'
 import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
 import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
+import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-
-    {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
+    {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -24,6 +24,7 @@ const available = [
     {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect", kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
+    {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
     {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
 ];
