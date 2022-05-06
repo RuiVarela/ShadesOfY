@@ -19,6 +19,11 @@ float sCut(float v, float position, float line_size) {
          smoothstep(position, position + line_size, v);
 }
 
+// makes a bar on a region [position - line_size, position + line_size] width a controllable fade
+float sBar(float v, float position, float line_size, float fade_size) {
+    return 1.0 - smoothstep(0.0, fade_size, abs(v - position) - line_size + fade_size);
+}
+
 // cuts a point
 float sCutPoint(vec2 v, vec2 position, float size) {
     float d = distance(v, position);

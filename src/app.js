@@ -11,11 +11,12 @@ import XorEffectFragmentSource from './glsl/XorEffect.frag'
 import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
 import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
 import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
+import FireEffectFragmentSource from './glsl/FireEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
+    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -27,6 +28,7 @@ const available = [
     {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
     {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
+    {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource }
 ];
 
 function fxFactory(info) {

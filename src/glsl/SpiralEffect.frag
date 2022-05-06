@@ -33,7 +33,7 @@ vec4 render(vec2 position) {
 
     float spiral = radius + angle / (2.0 * PI) * distance;
     spiral = mod(spiral + speed, distance);
-    spiral = sCut(spiral, distance / 2.0, line_size);
+    spiral = sBar(spiral, distance / 2.0, line_size, line_size * 0.2);
 
     return vec4(spiral);
 }

@@ -11,21 +11,28 @@ vec3 brick(vec2 uv) {
 
     vec2 buv = fract(scaled_uv);
 
-    float mask = 1.0f;
-    float mortar_y = 0.04;
+    float mortar_y = 0.02;
     float mortar_x = mortar_y / brick_ratio;
 
-    mask = smoothstep(0.0, mortar_x, buv.x) * smoothstep(1.0, 1.0 - mortar_x, buv.x) * 
-           smoothstep(0.0, mortar_y, buv.y) * smoothstep(1.0, 1.0 - mortar_y, buv.y);
-    
-    vec3 color = mix(vec3(0.83, 0.83, 0.77), vec3(0.5, 0.0, 0.0), mask);
+    float fade_y = mortar_y * 0.4;
+    float fade_x = fade_y / brick_ratio;
+
+
+    float mask = 0.0;
+    mask = max(mask, sBar(buv.x, 0.0, mortar_x, fade_x));
+    mask = max(mask, sBar(buv.x, 1.0, mortar_x, fade_x));
+    mask = max(mask, sBar(buv.y, 0.0, mortar_y, fade_y));
+    mask = max(mask, sBar(buv.y, 1.0, mortar_y, fade_y));
+
+
+    vec3 color = vec3(0.5, 0.0, 0.0);
 
     // shadowing
-    if (buv.x > mortar_x && buv.x < (1.0 - mortar_x) && 
-        buv.y > mortar_y && buv.y < (1.0 - mortar_y)) {
-        color *= 0.5 + 0.5 * sqrt(4.0 * buv.x * (1.0 - buv.x));
-        color *= 0.5 + 0.5 * sqrt(4.0 * buv.y * (1.0 - buv.y));
-    }
+    color *= 0.5 + 0.5 * sqrt(4.0 * buv.x * (1.0 - buv.x));
+    color *= 0.5 + 0.5 * sqrt(4.0 * buv.y * (1.0 - buv.y));
+
+    // mortar
+    color = mix(color, vec3(0.83, 0.83, 0.77), mask);
 
     return color;
 }
