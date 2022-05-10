@@ -30,3 +30,16 @@ float sCutPoint(vec2 v, vec2 position, float size) {
     return smoothstep(-size, 0.0, d) - smoothstep(0.0, size, d);
 }
 
+
+// Hashing 
+float Hash21(vec2 p) {
+    p = fract(p * vec2(233.34, 851.73));
+    p += dot(p, p + 23.45);
+    return fract(p.x*p.y);
+}
+
+vec2 Hash22(vec2 p) {
+    float n = Hash21(p);
+    return vec2(n, Hash21(p + n));
+}
+

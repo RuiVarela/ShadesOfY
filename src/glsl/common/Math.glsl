@@ -85,3 +85,15 @@ vec3 rotateY(vec3 v, float angle) {
 vec3 rotateZ(vec3 v, float angle) {
 	return rotation3dZ(angle) * v;
 }
+
+//
+// Computes the distnace from a point p to a line segment [a, b]
+//
+float distanceToLineSegment(vec2 p, vec2 a, vec2 b) {
+    vec2 pa = p - a;
+    vec2 ba = b - a;
+    float projection = dot(pa, ba) / dot(ba, ba);
+    float t = clamp(projection, 0.0, 1.0); // line segment
+
+    return length(pa - (ba * t));
+}

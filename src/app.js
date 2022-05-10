@@ -11,12 +11,12 @@ import XorEffectFragmentSource from './glsl/XorEffect.frag'
 import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
 import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
 import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
-import FireEffectFragmentSource from './glsl/FireEffect.frag'
+import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
+    {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
