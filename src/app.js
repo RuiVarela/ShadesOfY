@@ -16,7 +16,6 @@ import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -28,7 +27,8 @@ const available = [
     {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
     {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
-    {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource }
+    {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
+    {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource }
 ];
 
 function fxFactory(info) {

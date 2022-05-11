@@ -76,7 +76,8 @@ void main() {
 
     float t = time * 0.2;
     float mask = 0.0;
-    for (float i = 0.0; i <= 1.0; i += (1.0 / 3.0)) {
+    float planes = 3.0;
+    for (float i = 0.0; i <= 1.0; i += (1.0 / planes)) {
         float z = fract(t + i);
         float size = mix(5.0, 1.0, z);
         float fade = smoothstep(0.0, 0.5, z) * smoothstep(1.0, 0.8, z);
@@ -87,13 +88,16 @@ void main() {
 
     //vec3 base_color = vec3(0.0, 0.7, 0.30);
     vec3 base_color = cosPalette(pSin(time) * 0.1, ColorIq4) * 0.7;
-    vec3 color = base_color * mask;
+    vec3 color = cosPalette(0.75 + (gl_FragCoord.x / resolution.x) * 0.25, ColorIq1) * 0.2;
+    color += base_color * mask;
 
 
     vec2 screen_uv = (gl_FragCoord.xy / resolution) * 2.0 - 1.0;
     float vignette = clamp(pow(length(screen_uv), 3.0), 0.0, 1.0);
 
-    color += base_color * vignette * 0.140;
+    color += base_color * vignette * 0.240;
+
+    
 
         // Grid Drawing code
     // float grid_mask = 0.0;
