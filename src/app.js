@@ -17,8 +17,6 @@ import FireEffectFragmentSource from './glsl/FireEffect.frag'
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
-
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
@@ -30,7 +28,8 @@ const available = [
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
     {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
     {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
-    {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource }
+    {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
+    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource }
 ];
 
 function fxFactory(info) {
