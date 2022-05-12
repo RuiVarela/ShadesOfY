@@ -5,7 +5,7 @@
 
 vec2 getPos(vec2 id, vec2 offset) {
     float t = time + 1234.0;
-    vec2 noise = Hash22(id + offset);
+    vec2 noise = hash22(id + offset);
     float x = sin(t * noise.x);
     float y = cos(t * noise.y);
     return 2.0 * offset + vec2(x, y); // * 0.75;
@@ -52,7 +52,7 @@ float nuclear(vec2 uv) {
         vec2 b_position = getPos(id, b_offset); 
 
         
-        float noise = Hash21(id + b_offset);
+        float noise = hash21(id + b_offset);
         float sparkle = 0.035 / distance(block_uv, b_position);
         sparkle *= pSin(time * 3.0 + noise * 10.0);
         ball_mask = max(ball_mask, clamp(sparkle, 0.0, 1.0));
