@@ -13,12 +13,12 @@ void main() {
     const float A = 1.0;
     const float B = 1.0;
     float a = 2.0;
-    float b = 4.0;
+    float b = 6.0;
 
 
     float speed = 1.0;
-    float t_step = 0.1 * speed; 
-    float min_t = time - (15.0 * t_step);
+    float t_step = 0.05 * speed; 
+    float min_t = time - (25.0 * t_step);
 
     for (float t = time; t > min_t; t -= t_step) {
 

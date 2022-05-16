@@ -57,9 +57,9 @@ float nuclear(vec2 uv) {
         sparkle *= pSin(time * 3.0 + noise * 10.0);
         ball_mask = max(ball_mask, clamp(sparkle, 0.0, 1.0));
 
-        if (b_offset.x != 0.0 || b_offset.y != 0.0) {
+        //if (b_offset.x != 0.0 || b_offset.y != 0.0) {
             line_mask = max(line_mask, line(block_uv, a_position, b_position)); 
-        }
+        //}
     }
 
     return max(line_mask, ball_mask);
