@@ -13,10 +13,13 @@ import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
 import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
 import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
 import FireEffectFragmentSource from './glsl/FireEffect.frag'
+import LissajousEffectFragmentSource from './glsl/LissajousEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
+    {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
+
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
