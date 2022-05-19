@@ -35,12 +35,12 @@ void main() {
     const float A = 1.0;
     const float B = 1.0;
     float a = 2.0;
-    float b = pSin(time * 0.01) * 10.0;
+    float b = pSin(time * 0.05) * 10.0;
     
 
-    const float scaler_y = 0.80;
+    const float scaler_y = 0.85;
     float scaler_x = scaler_y * aspect;
-    const float speed = 3.0;
+    const float speed = 1.0;
     const float points = 40.0;
     const float t_step = 0.05; 
 
@@ -70,7 +70,7 @@ void main() {
     color = mix(color, matrix_green, mask);
 
     // noise
-    color += (0.05 + pSin(time) * 0.1) * fbm(uv * vec2(0.3, 25.0) + vec2(time * 100.0, time * 50.0));
+    color += 0.035 * fbm(uv * vec2(0.3, 25.0) + vec2(time * 100.0, time * 50.0));
 
     //
     // Tv edges
