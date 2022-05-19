@@ -14,11 +14,12 @@ import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
 import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
 import FireEffectFragmentSource from './glsl/FireEffect.frag'
 import LissajousEffectFragmentSource from './glsl/LissajousEffect.frag'
+import NoiseEffectFragmentSource from './glsl/NoiseEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 
 const available = [
-    {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
+    {name: "NoisePlotEffect", kind: "PixelEffect", fragment: NoiseEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -32,7 +33,8 @@ const available = [
     {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
     {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
     {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
-    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource }
+    {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
+    {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
 ];
 
 function fxFactory(info) {

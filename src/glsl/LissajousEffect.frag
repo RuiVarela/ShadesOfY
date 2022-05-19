@@ -1,26 +1,6 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
-
-float line(vec2 p, vec2 a, vec2 b) {
-    float dist = distanceToLineSegment(p, a, b);
-    float mask = sCut(dist, 0.0, 0.02);
-    
-    
-    //mask = max(mask, sCutPoint(p, a, 0.04));
-    // attenuation based on the distance between A and B
-    //dist = distance(a, b);
-    //mask *= smoothstep(2.5, 1.6, dist) * 0.5;
-
-    //mask *= 1.0 + sCut(dist, 1.5, 0.15);
-    
-
-    return mask;
-}
-
-void main() {
-    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
-    float aspect = (resolution.x / resolution.y);
-
+vec2 barrel(vec2 uv) {
     //
     // barrel coordinates
     //
@@ -30,7 +10,20 @@ void main() {
     radius = pow(radius, barrer_power);
     uv = radius * vec2(cos(theta), sin(theta));
 
+    return uv;
+}
 
+float line(vec2 p, vec2 a, vec2 b) {
+    float dist = distanceToLineSegment(p, a, b);
+    float mask = sCut(dist, 0.0, 0.02);
+    return mask;
+}
+
+void main() {
+    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
+    uv = barrel(uv);
+
+    float aspect = (resolution.x / resolution.y);
     //
     // compute lissajous
     //
@@ -42,7 +35,7 @@ void main() {
     const float A = 1.0;
     const float B = 1.0;
     float a = 2.0;
-    float b = 6.0;
+    float b = pSin(time * 0.01) * 10.0;
     
 
     const float scaler_y = 0.80;
@@ -53,6 +46,8 @@ void main() {
 
     float max_t = time * speed;
     float min_t = max_t - (points * t_step);
+
+    
 
     for (float i = 0.0; i < points; ++i) {
         float progress = 1.0 - (i / points);
@@ -66,13 +61,16 @@ void main() {
     }
 
 
+    // 
+    // green oscilloscope 
+    //
     const vec3 matrix_green = vec3(0.011, 0.625, 0.3828);
+    vec3 color = matrix_green * 0.15;
 
-    float green_noise = snoise(vec2(time * 0.2)) * 0.05 + 0.15;
-    vec3 color = matrix_green * green_noise;
-    
     color = mix(color, matrix_green, mask);
 
+    // noise
+    color += (0.05 + pSin(time) * 0.1) * fbm(uv * vec2(0.3, 25.0) + vec2(time * 100.0, time * 50.0));
 
     //
     // Tv edges
