@@ -15,15 +15,17 @@ import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
 import FireEffectFragmentSource from './glsl/FireEffect.frag'
 import LissajousEffectFragmentSource from './glsl/LissajousEffect.frag'
 import NoiseEffectFragmentSource from './glsl/NoiseEffect.frag'
+import ImpulseEffectFragmentSource from './glsl/ImpulseEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
-
 const available = [
-    {name: "NoisePlotEffect", kind: "PixelEffect", fragment: NoiseEffectFragmentSource },
+    {name: "ImpulseEffect", kind: "PixelEffect", fragment: ImpulseEffectFragmentSource },
 
     {name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
+
+    {name: "NoiseEffect", kind: "PixelEffect", fragment: NoiseEffectFragmentSource },
     {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
     {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },

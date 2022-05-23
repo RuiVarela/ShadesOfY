@@ -87,7 +87,17 @@ vec3 rotateZ(vec3 v, float angle) {
 }
 
 //
-// Computes the distnace from a point p to a line segment [a, b]
+// https://iquilezles.org/articles/functions/
+// Sinc curve
+//
+float sincZero( float x, float k )
+{
+    float a = PI*(k*x-1.0);
+    return sin(a)/a;
+}
+
+//
+// Computes the distance from a point p to a line segment [a, b]
 //
 float distanceToLineSegment(vec2 p, vec2 a, vec2 b) {
     vec2 pa = p - a;
