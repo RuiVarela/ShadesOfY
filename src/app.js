@@ -8,7 +8,6 @@ import SpiralEffectFragmentSource from './glsl/SpiralEffect.frag'
 import BounceEffectFragmentSource from './glsl/BounceEffect.frag'
 import LightsEffectFragmentSource from './glsl/LightsEffect.frag'
 import XorEffectFragmentSource from './glsl/XorEffect.frag'
-import SDF2dEffectFragmentSource from './glsl/SDF2dEffect.frag'
 import TunnelEffectFragmentSource from './glsl/TunnelEffect.frag'
 import PlasmaEffectFragmentSource from './glsl/PlasmaEffect.frag'
 import NukeEffectFragmentSource from './glsl/NukeEffect.frag'
@@ -19,23 +18,24 @@ import ImpulseEffectFragmentSource from './glsl/ImpulseEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 const available = [
-    {name: "ImpulseEffect", kind: "PixelEffect", fragment: ImpulseEffectFragmentSource },
-
-    {name: "BaseEffect", kind: "BaseEffect" },
+    {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
+    
+    //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
-
     {name: "NoiseEffect", kind: "PixelEffect", fragment: NoiseEffectFragmentSource },
-    {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
+
+
+
     {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect", kind: "PixelEffect", fragment: SpiralEffectFragmentSource },
     {name: "TunnelEffect", kind: "PixelEffect", fragment: TunnelEffectFragmentSource },
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
-    {name: "SDF2dEffect", kind: "PixelEffect", fragment: SDF2dEffectFragmentSource },
     {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
     {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
     {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
+    {name: "ImpulseEffect", kind: "PixelEffect", fragment: ImpulseEffectFragmentSource },
     {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
 ];
 

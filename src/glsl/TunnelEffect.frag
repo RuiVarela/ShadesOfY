@@ -37,10 +37,9 @@ vec3 brick(vec2 uv) {
     return color;
 }
 
-void main() {
-    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
+vec4 render(vec2 position) {
+    vec2 uv = nomalizeCoord(resolution, position);
 
-    
     float a = atan(uv.y, uv.x) + PI;
     float r1 = length(uv);
     float r2 = pow(pow(uv.x * uv.x, 4.0) + pow(uv.y * uv.y, 4.0), 1.0/8.0);
@@ -52,5 +51,12 @@ void main() {
 
     color = color * clamp(r * 1.0, 0.0, 1.0);
 
-    fragColor = vec4(color, 1.0);
+    return vec4(color, 1.0);
+}
+
+#pragma glslify: multisample = require(./common/multisample.glsl, render=render) 
+
+void main() 
+{
+    fragColor = multisample(4.0);
 }
