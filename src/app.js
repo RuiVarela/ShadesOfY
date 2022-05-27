@@ -15,10 +15,11 @@ import FireEffectFragmentSource from './glsl/FireEffect.frag'
 import LissajousEffectFragmentSource from './glsl/LissajousEffect.frag'
 import NoiseEffectFragmentSource from './glsl/NoiseEffect.frag'
 import ImpulseEffectFragmentSource from './glsl/ImpulseEffect.frag'
+import StarfieldEffectFragmentSource from './glsl/StarfieldEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 const available = [
-    {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
+    {name: "StarfieldEffect", kind: "PixelEffect", fragment: StarfieldEffectFragmentSource },
     
     //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -26,7 +27,7 @@ const available = [
     {name: "NoiseEffect", kind: "PixelEffect", fragment: NoiseEffectFragmentSource },
 
 
-
+    {name: "LineEffect", kind: "PixelEffect", fragment: LinesEffectFragmentSource },
     {name: "XorEffect", kind: "PixelEffect", fragment: XorEffectFragmentSource },
     {name: "WiggleEffect", kind: "PixelEffect", fragment: WiggleEffectFragmentSource },
     {name: "SpiralEffect", kind: "PixelEffect", fragment: SpiralEffectFragmentSource },

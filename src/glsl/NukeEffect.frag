@@ -1,6 +1,6 @@
 #pragma glslify: import('./common/PixelEffectFragmentHeader.glsl')
 
-// Source the art of code
+// Source - the art of code
 // https://www.youtube.com/watch?v=3CycKKJiwis&t=319s
 
 vec2 getPos(vec2 id, vec2 offset) {
