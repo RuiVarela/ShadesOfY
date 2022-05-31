@@ -18,9 +18,7 @@ import ImpulseEffectFragmentSource from './glsl/ImpulseEffect.frag'
 import StarfieldEffectFragmentSource from './glsl/StarfieldEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
-const available = [
-    {name: "StarfieldEffect", kind: "PixelEffect", fragment: StarfieldEffectFragmentSource },
-    
+const available = [    
     //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
@@ -35,6 +33,7 @@ const available = [
     {name: "LightsEffect", kind: "PixelEffect", fragment: LightsEffectFragmentSource },
     {name: "PlasmaEffect", kind: "PixelEffect", fragment: PlasmaEffectFragmentSource },
     {name: "NukeEffect", kind: "PixelEffect", fragment: NukeEffectFragmentSource },
+    {name: "StarfieldEffect", kind: "PixelEffect", fragment: StarfieldEffectFragmentSource },
     {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
     {name: "ImpulseEffect", kind: "PixelEffect", fragment: ImpulseEffectFragmentSource },
     {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
