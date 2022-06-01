@@ -15,6 +15,7 @@ struct Camera {
     float max_distance; // max ray marching distance to be considered an object
 };
 
+
 Camera createCamera() {
     Camera camera;
     camera.zoom = 1.0;
