@@ -16,9 +16,12 @@ import LissajousEffectFragmentSource from './glsl/LissajousEffect.frag'
 import NoiseEffectFragmentSource from './glsl/NoiseEffect.frag'
 import ImpulseEffectFragmentSource from './glsl/ImpulseEffect.frag'
 import StarfieldEffectFragmentSource from './glsl/StarfieldEffect.frag'
+import SphereEffectFragmentSource from './glsl/SphereEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
-const available = [    
+const available = [   
+    {name: "ShpereEffect", kind: "PixelEffect", fragment: SphereEffectFragmentSource },
+
     //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
