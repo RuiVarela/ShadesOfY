@@ -29,3 +29,22 @@ float sCutPoint(vec2 v, vec2 position, float size) {
     float d = distance(v, position);
     return smoothstep(-size, 0.0, d) - smoothstep(0.0, size, d);
 }
+
+// https://theorangeduck.com/page/avoiding-shader-conditionals
+
+// returns 1.0 when the condition is met and 0.0 otherwise
+float when_eq(float x, float y) { return 1.0 - abs(sign(x - y)); }
+vec2 when_eq(vec2 x, vec2 y)    { return 1.0 - abs(sign(x - y)); }
+vec3 when_eq(vec3 x, vec3 y)    { return 1.0 - abs(sign(x - y)); }
+vec4 when_eq(vec4 x, vec4 y)    { return 1.0 - abs(sign(x - y)); }
+
+vec4 when_neq(vec4 x, vec4 y) { return abs(sign(x - y)); }
+vec4 when_gt(vec4 x, vec4 y) { return max(sign(x - y), 0.0); }
+vec4 when_lt(vec4 x, vec4 y) { return max(sign(y - x), 0.0); }
+vec4 when_ge(vec4 x, vec4 y) { return 1.0 - when_lt(x, y); }
+vec4 when_le(vec4 x, vec4 y) { return 1.0 - when_gt(x, y); }
+
+vec4 when_and(vec4 a, vec4 b) { return a * b; }
+vec4 when_or(vec4 a, vec4 b) { return min(a + b, 1.0); }
+vec4 when_xor(vec4 a, vec4 b) { return (a + b) % 2.0; }
+vec4 when_not(vec4 a) { return 1.0 - a; }

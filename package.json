@@ -8,11 +8,12 @@
   "glslify": {
     "transform": [
       "glslify-import",
-      "./../glslify-shaker"
+      "./glslify-shaker"
     ]
   },
   "devDependencies": {
     "@parcel/transformer-glsl": "^2.4.1",
+    "glsl-strip-comments": "^1.0.0",
     "glsl-token-function-shaker": "^1.0.0",
     "glslify-import": "^3.1.0",
     "parcel": "latest",

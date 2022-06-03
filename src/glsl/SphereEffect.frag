@@ -3,69 +3,27 @@
 
 // https://www.youtube.com/watch?v=PGtv-dBi2wE&list=PLGmrMu-IwbgtMxMiV3x4IrHPlPmg7FD-P&index=2
 
-struct Camera {
-    vec3 ro;        // ray origin, position of the camera
-    vec3 rd;        // ray direction
+#define SPHERE_ID 1.0
+#define GROUND_PLANE_ID 2.0
+#define BACK_PLANE_ID 3.0
 
-    vec3 lookat;    // lookup directeio
-    vec3 up;        // up direction on the world
-    float zoom;     // zoom value
+void computeHit(in Camera camera, in vec3 position, inout Hit hit) {
+    vec4 sphere = vec4(0.0 + pSin(time * 1.0), 1.0 + pSin(time * 3.0) * 1.0, 6.0, 1.0); //xyz + w=radius
+    float sphere_distance = length(position - sphere.xyz) - sphere.w;
+    hit.dist = sphere_distance;
+    hit.object = SPHERE_ID;
+    //hit.dist = min(hit.dist, sphere_distance);
+    //hit.object = (hit.dist == sphere_distance) ? SPHERE_ID : hit.object;
 
-    int max_steps;      // max ray marching steps
-    float max_distance; // max ray marching distance to be considered an object
-};
-
-
-Camera createCamera() {
-    Camera camera;
-    camera.zoom = 1.0;
-
-    camera.ro = vec3(0.0, 0.0, -2.0);
-    camera.lookat = vec3(0.0, 0.0, 0.0);
-    camera.up = vec3(0.0, 1.0, 0.0);
-
-    camera.max_steps = 100;
-    camera.max_distance = 100.0;
-    return camera;
-}
-
-void computeCamera(inout Camera camera, in vec2 uv) {
-    // compute camera basis vector
-    vec3 f = normalize(camera.lookat - camera.ro); // forward
-    vec3 r = cross(camera.up, f); // right
-    vec3 u = cross(f, r);  // up
-    
-    // compute the intersection with the screen
-    vec3 c = camera.ro + f * camera.zoom; // screen center
-    vec3 i = c + uv.x * r + uv.y * u;   // screen intersection point
-
-    // compute the ray direction
-    camera.rd = i - camera.ro;
-}
+    // ground plane at (0)
+    float ground_plane_distance = position.y;
+    hit.dist = min(hit.dist, ground_plane_distance);
+    hit.object = (hit.dist == ground_plane_distance) ? GROUND_PLANE_ID : hit.object;
 
 
-float RayMarch(in Camera camera) {
-    float dO = 0.0; // distance from origin
-    for (int i = 0; i != camera.max_steps; ++i) {
-
-    }
-    return dO;
-}
-
-
-
-
-
-
-
-float DistLine(in Camera camera, in vec3 p) {
-    return length(cross(p - camera.ro, camera.rd)) / length(camera.rd);
-}
-
-float DrawPoint(in Camera camera, in vec3 p) {
-    float d = DistLine(camera, p);
-    d = smoothstep(0.06, 0.05, d);
-    return d;
+    float back_distance = abs(position.z - 10.0);
+    hit.dist = min(hit.dist, back_distance);
+    hit.object = (hit.dist == back_distance) ? BACK_PLANE_ID : hit.object;
 }
 
 void main() {
@@ -73,26 +31,38 @@ void main() {
 
     float t = time;
 
+    vec3 light_position = vec3(2.0, 2.0, 4.0);
+    light_position.xy += vec2(sin(time), cos(time) + 1.0) *2.0;
+
+
     Camera camera = createCamera();
-    camera.ro = vec3(3.0 * sin(t), 2.0, -3.0 * cos(t));
-    camera.lookat = vec3(0.5, 0.5, 0.5);
+    camera.ro = vec3(0.0, 1.0, 0.0);
+    camera.lookat = vec3(0.0, 1.0, 6.0);
     computeCamera(camera, uv);
 
+    Hit hit = RayMarch(camera);
 
-    //vec3 ro = vec3(0.0, 1.0, 0.0);                  
-    //vec3 rd = normalize(vec3(uv.x, uv.y, 1.0));     // ray direction
+    // compute diffuse term
+    vec3 light_vector = normalize(light_position - hit.point);
+    float diffuse = clamp(dot(hit.normal, light_vector), 0.0, 1.0);
 
-    float d = 0.0;
+    // compute shadow - reuse camera
+    camera.ro = hit.point + (hit.normal * camera.surface_distance * 2.0); // we need to start a bit away from the surface
+    camera.rd = light_vector;
+    camera.compute_normal = false;
+    Hit shadow_march = RayMarch(camera);
+    float in_shadow = (shadow_march.dist < distance(light_position, hit.point)) ? 1.0 : 0.0;
 
-    d += DrawPoint(camera, vec3(0.0, 0.0, 0.0));
-    d += DrawPoint(camera, vec3(0.0, 0.0, 1.0));
-    d += DrawPoint(camera, vec3(0.0, 1.0, 0.0));
-    d += DrawPoint(camera, vec3(0.0, 1.0, 1.0));
 
-    d += DrawPoint(camera, vec3(1.0, 0.0, 0.0));
-    d += DrawPoint(camera, vec3(1.0, 0.0, 1.0));
-    d += DrawPoint(camera, vec3(1.0, 1.0, 0.0));
-    d += DrawPoint(camera, vec3(1.0, 1.0, 1.0));
+    vec3 color_picker = when_eq(vec3(hit.object), vec3(SPHERE_ID, GROUND_PLANE_ID, BACK_PLANE_ID));
+    vec3 object_color = color_picker.x * vec3(1.0, 0.0, 0.0) + 
+                        color_picker.y * vec3(0.0, 1.0, 0.0) + 
+                        color_picker.z * vec3(0.0, 0.0, 1.0);
 
-    fragColor = vec4(d, d, d, 1.0);
+    object_color = object_color * (1.0 - 0.5 * in_shadow); 
+
+    vec3 color = object_color * vec3(0.2 + 0.8 * diffuse);
+
+
+    fragColor = vec4(color, 1.0);
 }
