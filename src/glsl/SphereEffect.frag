@@ -6,24 +6,52 @@
 #define SPHERE_ID 1.0
 #define GROUND_PLANE_ID 2.0
 #define BACK_PLANE_ID 3.0
+#define LIGHT_ID 4.0
 
-void computeHit(in Camera camera, in vec3 position, inout Hit hit) {
-    vec4 sphere = vec4(0.0, 0.5 + pSin(time * 3.0) * 1.0, 6.0, 0.5); //xyz + w=radius
-    float sphere_distance = length(position - sphere.xyz) - sphere.w;
-    hit.dist = sphere_distance;
-    hit.object = SPHERE_ID;
-    //hit.dist = min(hit.dist, sphere_distance);
-    //hit.object = (hit.dist == sphere_distance) ? SPHERE_ID : hit.object;
+vec3 getLigthPosition() {
+    vec3 position = vec3(0.0, 1.5, 0.0);
+    position.xz += vec2(sin(time), cos(time)) * 2.0;
+    return position;
+}
 
+void computeHit(in Camera camera, in vec3 position, inout Hit hit) 
+{
     // ground plane at (0)
     float ground_plane_distance = position.y;
-    hit.dist = min(hit.dist, ground_plane_distance);
-    hit.object = (hit.dist == ground_plane_distance) ? GROUND_PLANE_ID : hit.object;
+    hit.dist = ground_plane_distance;
+    hit.object = GROUND_PLANE_ID;
+    //hit.dist = min(hit.dist, ground_plane_distance);
+    //hit.object = (hit.dist == ground_plane_distance) ? GROUND_PLANE_ID : hit.object;
 
 
-    float back_distance = abs(position.z - 10.0);
+    float back_distance = abs(position.z - 6.0);
     hit.dist = min(hit.dist, back_distance);
     hit.object = (hit.dist == back_distance) ? BACK_PLANE_ID : hit.object;
+
+
+
+    const vec4 spheres[9] = vec4[9] (
+        vec4(-1.0, 1.0, -1.0, 0.3), vec4( 0.0, 1.0, -1.0, 0.3), vec4( 1.0, 1.0, -1.0, 0.3),
+        vec4(-1.0, 1.0,  0.0, 0.3), vec4( 0.0, 1.0,  0.0, 0.3), vec4( 1.0, 1.0,  0.0, 0.3),
+        vec4(-1.0, 1.0,  1.0, 0.3), vec4( 0.0, 1.0,  1.0, 0.3), vec4( 1.0, 1.0,  1.0, 0.3)
+    );
+
+ //   spheres[spheres.length() - 1].xyz = getLigthPosition(); 
+
+    for (int i = 0; i != spheres.length(); ++i) {
+        vec4 sphere = spheres[i]; //xyz + w=radius
+        float sphere_distance = length(position - sphere.xyz) - sphere.w;
+        hit.dist = min(hit.dist, sphere_distance);
+        hit.object = (hit.dist == sphere_distance) ? SPHERE_ID : hit.object;
+    }
+
+    // light 
+    {
+        vec4 sphere = vec4(getLigthPosition() + vec3(0.0, 0.2, 0.0), 0.05); //xyz + w=radius
+        float sphere_distance = length(position - sphere.xyz) - sphere.w;
+        hit.dist = min(hit.dist, sphere_distance);
+        hit.object = (hit.dist == sphere_distance) ? LIGHT_ID : hit.object;
+    }
 }
 
 void main() {
@@ -31,13 +59,12 @@ void main() {
 
     float t = time;
 
-    vec3 light_position = vec3(2.0, 3.0, 1.0);
-    //light_position.xy += vec2(sin(time), cos(time) + 1.0) *2.0;
+    vec3 light_position = getLigthPosition();
 
 
     Camera camera = createCamera();
-    camera.ro = vec3(0.0, 1.0, 0.0);
-    camera.lookat = vec3(0.0, 0.5, 6.0);
+    camera.ro = vec3(0.0, 2.0, -5.0);
+    camera.lookat = vec3(0.0, 1.0, 0.0);
     computeCamera(camera, uv);
 
     Hit hit = RayMarch(camera);
@@ -57,10 +84,11 @@ void main() {
     vec3 ambient = vec3(1.0, 0.6, 0.001);
 
 
-    vec3 color_picker = when_eq(vec3(hit.object), vec3(SPHERE_ID, GROUND_PLANE_ID, BACK_PLANE_ID));
+    vec4 color_picker = when_eq(vec4(hit.object), vec4(SPHERE_ID, GROUND_PLANE_ID, BACK_PLANE_ID, LIGHT_ID));
     vec3 object_color = color_picker.x * vec3(1.0, 0.0, 0.0) + 
                         color_picker.y * vec3(0.0, 1.0, 0.0) + 
-                        color_picker.z * vec3(0.0, 0.0, 1.0);
+                        color_picker.z * vec3(0.0, 0.0, 1.0) + 
+                        color_picker.w * vec3(0.5, 0.5, 0.0);;
 
     object_color = object_color * (1.0 - 0.5 * in_shadow); 
 
