@@ -46,11 +46,14 @@ void computeCamera(inout Camera camera, in vec2 uv) {
     // compute the intersection with the screen
     vec3 c = camera.ro + f * camera.zoom; // screen center
     vec3 i = c + uv.x * r + uv.y * u;   // screen intersection point
-
     // compute the ray direction
-    camera.rd = i - camera.ro;
-}
+    camera.rd = normalize(i - camera.ro);
 
+    // alternative
+    
+    //mat3 camera_mat = mat3(r, u, f);
+    //camera.rd = normalize(camera_mat * vec3(uv, camera.zoom));
+}
 
 void computeAuxiliaryHitInfo(in Camera camera, in float travel, inout Hit hit) {
     hit.dist = travel;

@@ -8,7 +8,7 @@
 #define BACK_PLANE_ID 3.0
 
 void computeHit(in Camera camera, in vec3 position, inout Hit hit) {
-    vec4 sphere = vec4(0.0 + pSin(time * 1.0), 1.0 + pSin(time * 3.0) * 1.0, 6.0, 1.0); //xyz + w=radius
+    vec4 sphere = vec4(0.0, 0.5 + pSin(time * 3.0) * 1.0, 6.0, 0.5); //xyz + w=radius
     float sphere_distance = length(position - sphere.xyz) - sphere.w;
     hit.dist = sphere_distance;
     hit.object = SPHERE_ID;
@@ -27,17 +27,17 @@ void computeHit(in Camera camera, in vec3 position, inout Hit hit) {
 }
 
 void main() {
-    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy);
+    vec2 uv = nomalizeCoord(resolution, gl_FragCoord.xy) * 0.5;
 
     float t = time;
 
-    vec3 light_position = vec3(2.0, 2.0, 4.0);
-    light_position.xy += vec2(sin(time), cos(time) + 1.0) *2.0;
+    vec3 light_position = vec3(2.0, 3.0, 1.0);
+    //light_position.xy += vec2(sin(time), cos(time) + 1.0) *2.0;
 
 
     Camera camera = createCamera();
     camera.ro = vec3(0.0, 1.0, 0.0);
-    camera.lookat = vec3(0.0, 1.0, 6.0);
+    camera.lookat = vec3(0.0, 0.5, 6.0);
     computeCamera(camera, uv);
 
     Hit hit = RayMarch(camera);
@@ -54,6 +54,9 @@ void main() {
     float in_shadow = (shadow_march.dist < distance(light_position, hit.point)) ? 1.0 : 0.0;
 
 
+    vec3 ambient = vec3(1.0, 0.6, 0.001);
+
+
     vec3 color_picker = when_eq(vec3(hit.object), vec3(SPHERE_ID, GROUND_PLANE_ID, BACK_PLANE_ID));
     vec3 object_color = color_picker.x * vec3(1.0, 0.0, 0.0) + 
                         color_picker.y * vec3(0.0, 1.0, 0.0) + 
@@ -61,7 +64,7 @@ void main() {
 
     object_color = object_color * (1.0 - 0.5 * in_shadow); 
 
-    vec3 color = object_color * vec3(0.2 + 0.8 * diffuse);
+    vec3 color = mix(ambient, object_color * diffuse, 0.85);
 
 
     fragColor = vec4(color, 1.0);
