@@ -1,3 +1,6 @@
+// https://www.youtube.com/watch?v=PGtv-dBi2wE&list=PLGmrMu-IwbgtMxMiV3x4IrHPlPmg7FD-P&index=2
+// https://www.youtube.com/watch?v=Ff0jJyyiVyw&t=854
+
 struct Camera {
     vec3 ro;        // ray origin, position of the camera
     vec3 rd;        // ray direction
@@ -98,6 +101,37 @@ Hit RayMarch(in Camera camera) {
     
     return hit;
 }
+
+//
+// Primitives
+//
+float sdSphere(in vec3 p, in vec3 c, in float r) {
+    return distance(p, c) - r;
+}
+
+float sdCapsule(in vec3 p, in vec3 a, in vec3 b, in float r) {
+    vec3 ab = b - a;
+    vec3 ap = p - a;
+    
+    float t = dot(ab, ap) / dot(ab, ab);
+    t = clamp(t, 0.0, 1.0);
+
+    vec3 c = a + t * ab;
+    return distance(p, c) - r;
+}
+
+// r = ring radius, and inner radius
+float sdTorus(in vec3 p, in vec3 c, in vec2 r) {
+    p -= c;
+    float x = length(p.xz) - r.x;
+    return length(vec2(x, p.y)) - r.y;
+}
+
+float sdBox(in vec3 p, in vec3 c, in vec3 s) {
+    p -= c;
+    return length(max(abs(p) - s, 0.0));
+}
+
 
 
 /*
