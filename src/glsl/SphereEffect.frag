@@ -30,25 +30,23 @@ void computeHit(in Camera camera, in vec3 position, inout Hit hit)
 
 
 
-    const vec4 spheres[9] = vec4[9] (
-        vec4(-1.0, 1.0, -1.0, 0.3), vec4( 0.0, 1.0, -1.0, 0.3), vec4( 1.0, 1.0, -1.0, 0.3),
-        vec4(-1.0, 1.0,  0.0, 0.3), vec4( 0.0, 1.0,  0.0, 0.3), vec4( 1.0, 1.0,  0.0, 0.3),
-        vec4(-1.0, 1.0,  1.0, 0.3), vec4( 0.0, 1.0,  1.0, 0.3), vec4( 1.0, 1.0,  1.0, 0.3)
+    const vec3 spheres[9] = vec3[9] (
+        vec3(-1.0, 1.0, -1.0), vec3( 0.0, 1.0, -1.0), vec3( 1.0, 1.0, -1.0),
+        vec3(-1.0, 1.0,  0.0), vec3( 0.0, 1.0,  0.0), vec3( 1.0, 1.0,  0.0),
+        vec3(-1.0, 1.0,  1.0), vec3( 0.0, 1.0,  1.0), vec3( 1.0, 1.0,  1.0)
     );
 
  //   spheres[spheres.length() - 1].xyz = getLigthPosition(); 
 
     for (int i = 0; i != spheres.length(); ++i) {
-        vec4 sphere = spheres[i]; //xyz + w=radius
-        float sphere_distance = length(position - sphere.xyz) - sphere.w;
+        float sphere_distance = sdSphere(position, spheres[i], 0.3);
         hit.dist = min(hit.dist, sphere_distance);
         hit.object = (hit.dist == sphere_distance) ? SPHERE_ID : hit.object;
     }
 
     // light 
     {
-        vec4 sphere = vec4(getLigthPosition() + vec3(0.0, 0.2, 0.0), 0.05); //xyz + w=radius
-        float sphere_distance = length(position - sphere.xyz) - sphere.w;
+        float sphere_distance = sdSphere(position, getLigthPosition() + vec3(0.0, 0.2, 0.0), 0.05);
         hit.dist = min(hit.dist, sphere_distance);
         hit.object = (hit.dist == sphere_distance) ? LIGHT_ID : hit.object;
     }
