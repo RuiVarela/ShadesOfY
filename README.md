@@ -3,12 +3,12 @@
 ShadesOfY is a glsl shader playground,   
 A stripped down and selfhosted `shadertoy` like web app.
 
-![MagicWand](https://github.com/RuiVarela/ShadesOfY/raw/main/readme00.gif)   
+![ShadesOfY](https://github.com/RuiVarela/ShadesOfY/raw/main/readme00.gif)   
 
 ## Development
 ```
 git clone git@github.com:RuiVarela/ShadesOfY.git
-cd ShadesOfY 
+cd ShadesOfY
 npm install
 
 npm run start
