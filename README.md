@@ -17,6 +17,6 @@ npm run build
 ```
 
 # Credits
-- iq ![articles and videos](https://iquilezles.org/) are the goldstandard on this area
-- Martijn ![great videos](https://www.youtube.com/c/TheArtofCodeIsCool)
-- stack.gl ![ecosystem](http://stack.gl/)
+- iq [articles and videos](https://iquilezles.org/) are the goldstandard on this area
+- Martijn [great videos](https://www.youtube.com/c/TheArtofCodeIsCool)
+- stack.gl [ecosystem](http://stack.gl/)
