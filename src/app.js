@@ -20,8 +20,6 @@ import SphereEffectFragmentSource from './glsl/SphereEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
 const available = [   
-    {name: "ShpereEffect", kind: "PixelEffect", fragment: SphereEffectFragmentSource },
-
     //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
     {name: "BounceEffect", kind: "PixelEffect", fragment: BounceEffectFragmentSource },
@@ -40,6 +38,8 @@ const available = [
     {name: "FireEffect", kind: "PixelEffect", fragment: FireEffectFragmentSource },
     {name: "ImpulseEffect", kind: "PixelEffect", fragment: ImpulseEffectFragmentSource },
     {name: "LissajousEffect", kind: "PixelEffect", fragment: LissajousEffectFragmentSource },
+
+    {name: "ShpereEffect", kind: "PixelEffect", fragment: SphereEffectFragmentSource },
 ];
 
 function fxFactory(info) {

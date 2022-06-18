@@ -22,3 +22,19 @@ fieldset { border-width:0; padding:0; margin:0; }
   bottom: 1rem;
   left: 1rem;
 }
+
+#menu, #menu a {
+  font-family: monospace;
+  font-size: 12pt;
+  color: white;
+}
+
+#menu {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
