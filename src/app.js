@@ -19,6 +19,7 @@ import StarfieldEffectFragmentSource from './glsl/StarfieldEffect.frag'
 import SphereEffectFragmentSource from './glsl/SphereEffect.frag'
 
 //console.log(LinesEffectFragmentSource);
+let selectedIndex = 13
 const available = [   
     //{name: "BaseEffect", kind: "BaseEffect" },
     {name: "FunctionPlotEffect", kind: "PixelEffect", fragment: FunctionPlotEffectFragmentSource },
@@ -72,7 +73,9 @@ selectList.addEventListener("change", (event) => {
 
 const gl = document.querySelector("#gl_canvas").getContext("webgl2");
 var running_effect = null;
-var next_effect = available[0];
+
+var next_effect = available[selectedIndex];
+selectList.selectedIndex = selectedIndex;
 
 function render(time) {
     if (next_effect != null) {
